@@ -1,0 +1,90 @@
+body {
+    background-color: black;
+    padding: 10px;
+}
+.planet {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    border: 2px solid white;
+}
+.moon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(237, 237, 237);
+    border: 5px solid red;
+}
+
+/* .color-1{
+  background-color: #635147;
+}
+
+.color-2{
+  background-color: #882d17;
+}
+
+.color-3{
+  background-color: #cc7722;
+}
+
+.color-4{
+  background-color: #7F9FBC ;
+}
+
+.color-4{
+  background-color: #a52a2a;
+}
+
+.color-5{
+    background-color: azure;
+}
+
+.color-6{
+    background-color: gold;
+}
+
+.color-7{
+    background-color: crimson;
+}
+
+.color-8{
+    background-color: aquamarine;
+}
+ */
+
+  .mercury {
+    background-color: #635147;
+  }
+
+  .venus {
+      background-color: #882d17;
+  }
+
+  .earth {
+      background-color: #cc7722;
+  }
+
+  .mars {
+      background-color: #7F9FBC ;
+  }
+
+  .jupiter {
+      background-color: #a52a2a;
+  }
+
+  .saturn {
+      background-color: azure;
+  }
+
+  .uranus {
+      background-color: gold;
+  }
+
+  .neptune {
+      background-color: crimson;
+  }

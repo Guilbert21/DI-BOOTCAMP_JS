@@ -1,0 +1,15 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    /* background-color: aqua; */
+}
+
+#parent{
+    background-color: aquamarine;
+    border-radius: 5px;
+    border: 5px solid rgb(123, 114, 114);
+    display: none;
+    align-items: center;
+}
+
+

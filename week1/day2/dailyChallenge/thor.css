@@ -1,0 +1,126 @@
+body{
+	padding: 0;
+    margin: 0;
+    
+}
+
+.left{
+    color: aliceblue;
+    padding-top: 20px;
+    padding-left: 40px;
+    font-size: 30px;
+    font-family: 'Reem Kufi', sans-serif; 
+}
+
+a{
+    padding-top: 20px;
+    padding-right: 10px;
+    color: aliceblue;
+    text-decoration: none;
+    float: right;
+
+}
+
+nav{
+    display:flex ;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    overflow: auto;
+}
+.left{
+    color: aliceblue;
+    padding-top: 10px;
+    padding-left: 40px;
+    font-size: 30px;
+    font-family: 'Reem Kufi', sans-serif; 
+}
+
+a{
+    padding-top: 20px;
+    margin-left: 20px;
+    color: aliceblue;
+    text-decoration: none;
+    float: left;
+    
+
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    height: 86%;
+    bottom: 0;
+    background-color: black;
+}
+
+img{
+    background-repeat: no-repeat;
+    width:100%;
+    position:absolute;
+    bottom: 0;
+    height: 93%;
+}
+
+.description{
+    z-index: 3;
+    width: 60%;
+    padding-left: 175px;
+    padding-top:350px;
+
+}
+
+.thor{
+font-family: 'Zen Antique', serif;
+font-size: 40px;
+color: aliceblue;
+}
+
+p{
+    color: aliceblue;
+}
+
+@media  screen and (min-height:600px) {
+    .thor{
+        font-size:25px;
+    }
+    nav{
+        background-color: yellow;  
+    }
+    .left{
+        color: black;
+    }
+    a{
+        color: white;
+    }
+}
+
+@media screen and (min-width:600px){
+    .thor{
+        font-size:35px;
+
+    }
+}
+
+@media screen and (min-width:992px)and (max-width: 1999px) {
+   nav{
+    background-color:red;
+      }
+   .left{
+    color: white;
+        }
+
+   }
+
+   @media screen and (min-width:1200px){
+    nav{
+        background-color:black;
+    
+    }
+    .thor{
+        color:white;
+    }
+   }
