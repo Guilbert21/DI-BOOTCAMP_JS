@@ -51,3 +51,11 @@ gameInfo.forEach((points) => {
     totalScore += points.score;
 })
 console.log(totalScore);
+
+const person = {
+  name: 'Lydia',
+  age: 21,
+};
+
+// get value 
+console.log(Object.values(person)); 
