@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let xhr = new XMLHttpRequest();
+    let searchText = 'sun'
+    let url = `https://api.giphy.com/v1/gifs/search?q=` + searchText +`&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My`;
+
+    xhr.open("GET", url, true);
+
+    xhr.responseType = "json";
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log(xhr.response);
+        }
+    };
+
+    xhr.send();
+</script>
+
+    <script src="main.js"></script>
+</body>
+</html>
