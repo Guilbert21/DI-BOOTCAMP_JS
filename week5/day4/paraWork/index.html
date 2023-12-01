@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chuck Norris Jokes</title>
+</head>
+<body>
+    <h1>Chuck Norris Jokes</h1>
+    <button onclick="getJoke('dev')">Get Dev Joke</button>
+    <button onclick="getJoke('science')">Get Science Joke</button>
+    <button onclick="getJoke('history')">Get History Joke</button>
+
+    <div id="jokeContainer"></div>
+
+    <script>
+        function getJoke(category) {
+            fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const jokeContainer = document.getElementById('jokeContainer');
+                    jokeContainer.innerHTML = data.value;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
