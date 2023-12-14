@@ -26,7 +26,7 @@ Feel free to explore, laugh at my debugging adventures, or maybe even shed a tea
 
 ## Connect with Me
 
-Have a witty joke, a JavaScript meme, or just want to chat about the wonders of semicolons? Slide into my DMs on [Twitter](https://twitter.com/yourcodingbuddy) or [LinkedIn](https://www.linkedin.com/in/francois-antoni0/).
+Have a witty joke, a JavaScript meme, or just want to chat about the wonders of semicolons? Slide into my DMs on [LinkedIn](https://www.linkedin.com/in/guilbert-fran%C3%A7ois-060470261/).
 
 ## Parting Words
 
