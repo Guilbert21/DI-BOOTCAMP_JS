@@ -1,0 +1,50 @@
+/* Vote.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .language-container {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .language-name {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .language-votes {
+    font-size: 14px;
+    color: #777;
+  }
+  
