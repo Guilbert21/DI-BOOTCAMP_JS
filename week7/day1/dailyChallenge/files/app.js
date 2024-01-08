@@ -1,3 +1,3 @@
-const readFile = require('./read-file.js');
+const readFile = require('../read-file');
 
 readFile();
