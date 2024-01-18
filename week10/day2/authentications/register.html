@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script>
+            function register(event){
+                event.preventDefault()
+                //alert('inside submit function')
+                
+
+                let username = document.forms[0].username.value
+                let password = document.forms[0].password.value
+                fetch('/auth/register',{
+                    method: 'POST',
+                    headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({
+                        'username' : username,
+                        'password' : password
+
+                    })
+                })
+                
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <form onsubmit="return register(event)">
+            <input type="text" name="username" placeholder="username" value="nayar"/>
+            <input type="password" name="password" placeholder="password" value="lol"/>
+            <input type="submit" text="submit"/>
+        </form>
+    </body>    
+</html>
