@@ -15,6 +15,4 @@
 -- SELECT lastname FROM customers ORDER BY firstname ASC;
 
 
--- exercise2
-
 
