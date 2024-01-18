@@ -1,22 +1,22 @@
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', initializeTasks);
 
 function addTask() {
-  const name = document.getElementById('name').value;
-  const description = document.getElementById('description').value;
-  const startDateString = document.getElementById('startDate').value;
-  const endDateString = document.getElementById('endDate').value;
+  const nameInput = document.getElementById('name');
+  const descriptionInput = document.getElementById('description');
+  const startDateInput = document.getElementById('startDate');
+  const endDateInput = document.getElementById('endDate');
 
-
-  const startDate = new Date(startDateString);
-  const endDate = new Date(endDateString);
-
+  const name = nameInput.value;
+  const description = descriptionInput.value;
+  const startDate = new Date(startDateInput.value);
+  const endDate = new Date(endDateInput.value);
 
   if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
     alert('Invalid date format');
     return;
   }
 
-  const task = {
+  const newTask = {
     name,
     description,
     startDate,
@@ -24,62 +24,49 @@ function addTask() {
     isCompleted: false
   };
 
-  const tasks = getTasksFromLocalStorage();
-  tasks.push(task);
+  const tasks = fetchTasksFromLocalStorage();
+  tasks.push(newTask);
   saveTasksToLocalStorage(tasks);
 
-  loadTasks();
-  clearForm();
+  refreshTasks();
+  clearFormInputs(nameInput, descriptionInput, startDateInput, endDateInput);
 }
 
-function loadTasks() {
+function initializeTasks() {
   const taskList = document.getElementById('taskList');
   taskList.innerHTML = '';
 
-  const tasks = getTasksFromLocalStorage();
-  tasks.sort((a, b) => a.startDate - b.startDate);
+  const tasks = fetchTasksFromLocalStorage();
+  sortTasksByStartDate(tasks);
 
   tasks.forEach(task => {
-    const taskElement = document.createElement('div');
-    taskElement.classList.add('task');
-    if (task.isCompleted) {
-      taskElement.classList.add('completed');
-    } else if (task.endDate < new Date()) {
-      taskElement.classList.add('overdue');
-    }
-
-    taskElement.innerHTML = `
-      <h3>${task.name}</h3>
-      <p>Start date: ${formatDate(task.startDate)}</p>
-      <p>Days left: ${calculateDaysLeft(task.endDate)}</p>
-      <p>${task.description}</p>
-      <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onchange="updateStatus(${tasks.indexOf(task)})">
-      <button onclick="deleteTask(${tasks.indexOf(task)})">X</button>
-      <button onclick="editTask(${tasks.indexOf(task)})">Edit</button>
-    `;
-
+    const taskElement = createTaskElement(task);
     taskList.appendChild(taskElement);
   });
 }
 
-function updateStatus(index) {
-  const tasks = getTasksFromLocalStorage();
-  tasks[index].isCompleted = !tasks[index].isCompleted;
-  saveTasksToLocalStorage(tasks);
-  loadTasks();
+function refreshTasks() {
+  initializeTasks();
 }
 
-function deleteTask(index) {
+function updateTaskStatus(index) {
+  const tasks = fetchTasksFromLocalStorage();
+  tasks[index].isCompleted = !tasks[index].isCompleted;
+  saveTasksToLocalStorage(tasks);
+  refreshTasks();
+}
+
+function removeTask(index) {
   if (confirm('Are you sure you want to delete this task?')) {
-    const tasks = getTasksFromLocalStorage();
+    const tasks = fetchTasksFromLocalStorage();
     tasks.splice(index, 1);
     saveTasksToLocalStorage(tasks);
-    loadTasks();
+    refreshTasks();
   }
 }
 
-function editTask(index) {
-  const tasks = getTasksFromLocalStorage();
+function modifyTask(index) {
+  const tasks = fetchTasksFromLocalStorage();
   const editedTask = tasks[index];
 
   const newName = prompt('Enter the new name:', editedTask.name);
@@ -87,27 +74,24 @@ function editTask(index) {
   const newStartDateString = prompt('Enter the new start date and time (YYYY-MM-DDTHH:mm):', formatDate(editedTask.startDate));
   const newEndDateString = prompt('Enter the new end date and time (YYYY-MM-DDTHH:mm):', formatDate(editedTask.endDate));
 
-  
   const newStartDate = new Date(newStartDateString);
   const newEndDate = new Date(newEndDateString);
 
-  
   if (isNaN(newStartDate.getTime()) || isNaN(newEndDate.getTime())) {
     alert('Invalid date format');
     return;
   }
 
-  
   editedTask.name = newName;
   editedTask.description = newDescription;
   editedTask.startDate = newStartDate;
   editedTask.endDate = newEndDate;
 
   saveTasksToLocalStorage(tasks);
-  loadTasks();
+  refreshTasks();
 }
 
-function getTasksFromLocalStorage() {
+function fetchTasksFromLocalStorage() {
   return JSON.parse(localStorage.getItem('tasks')) || [];
 }
 
@@ -115,16 +99,40 @@ function saveTasksToLocalStorage(tasks) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-function clearForm() {
-  document.getElementById('name').value = '';
-  document.getElementById('description').value = '';
-  document.getElementById('startDate').value = '';
-  document.getElementById('endDate').value = '';
+function clearFormInputs(...inputs) {
+  inputs.forEach(input => (input.value = ''));
 }
 
 function formatDate(date) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+}
+
+function sortTasksByStartDate(tasks) {
+  tasks.sort((a, b) => a.startDate - b.startDate);
+}
+
+function createTaskElement(task) {
+  const taskElement = document.createElement('div');
+  taskElement.classList.add('task');
+  
+  if (task.isCompleted) {
+    taskElement.classList.add('completed');
+  } else if (task.endDate < new Date()) {
+    taskElement.classList.add('overdue');
+  }
+
+  taskElement.innerHTML = `
+    <h3>${task.name}</h3>
+    <p>Start date: ${formatDate(task.startDate)}</p>
+    <p>Days left: ${calculateDaysLeft(task.endDate)}</p>
+    <p>${task.description}</p>
+    <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onchange="updateTaskStatus(${tasks.indexOf(task)})">
+    <button onclick="removeTask(${tasks.indexOf(task)})">X</button>
+    <button onclick="modifyTask(${tasks.indexOf(task)})">Edit</button>
+  `;
+
+  return taskElement;
 }
 
 function calculateDaysLeft(endDate) {
